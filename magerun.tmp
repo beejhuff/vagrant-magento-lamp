@@ -1,0 +1,1 @@
+n98-magerun.phar install --dbHost="localhost" --dbUser="root" --dbPass="vagrant" --dbName="magento17" --installSampleData=yes --useDefaultConfigParams=yes --magentoVersionByName="magento-ce-1.7.0.2" --installationFolder="." --baseUrl="http://magento17.dev/"

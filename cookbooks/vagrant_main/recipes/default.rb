@@ -9,11 +9,11 @@ include_recipe "mysql::server"
 include_recipe "php"
 include_recipe "php::module_mysql"
 include_recipe "apache2::mod_php5"
-include_recipe "python"
-include_recipe "nodejs"
-include_recipe "npm"
+#include_recipe "python"
+#include_recipe "nodejs"
+#include_recipe "npm"
 include_recipe "composer"
-include_recipe "drush"
+include_recipe "magerun"
 
 # Install packages
 %w{ debconf vim screen tmux mc subversion curl make g++ libsqlite3-dev graphviz libxml2-utils lynx links}.each do |a_package|
@@ -26,9 +26,9 @@ end
 end
 
 # Install npm modules
-%w{ coffee-script grunt-cli bower yo less csslint }.each do |a_package|
-  npm_package a_package
-end
+#%w{ coffee-script grunt-cli bower yo less csslint }.each do |a_package|
+#  npm_package a_package
+#end
 
 # Generate selfsigned ssl
 execute "make-ssl-cert" do
@@ -117,6 +117,14 @@ package "php5-curl" do
   action :install
 end
 
+package "php-apc" do
+  action :install
+end
+
+package "php5-memcache" do
+  action :install
+end
+
 # Install php-xsl
 package "php5-xsl" do
   action :install
@@ -146,14 +154,14 @@ bash "deploy" do
 end
 
 # Install Phing
-channel = php_pear_channel "pear.phing.info" do
-  action :discover
-end
-php_pear "phing" do
-  version "stable"
-  channel channel.channel_name
-  action :install
-end
+#channel = php_pear_channel "pear.phing.info" do
+#  action :discover
+#end
+#php_pear "phing" do
+#  version "stable"
+#  channel channel.channel_name
+#  action :install
+#end
 
 # Install Percona Toolkit
 bash "percona-key" do
@@ -174,4 +182,4 @@ end
 end
 
 # Install wp2github
-python_pip "wp2github"
+# python_pip "wp2github"
